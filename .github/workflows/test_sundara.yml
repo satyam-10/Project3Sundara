@@ -1,4 +1,4 @@
-name: deploy-model-training-pipeline
+name: training-pipeline-test
 
 on: 
   workflow_dispatch:
