@@ -19,4 +19,4 @@ variables:
 
   # For pipeline reference
   resource_group: default_resourse_group
-  aml_workspace: demo_workspace
+  aml_workspace: 
