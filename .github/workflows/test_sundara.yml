@@ -1,12 +1,7 @@
-name: test-sundara-pipeline
+name: deploy-model-training-pipeline
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+on: 
+  workflow_dispatch:
 
 jobs:
   get-config:
@@ -34,7 +29,7 @@ jobs:
     with:
       resource_group: ${{ needs.get-config.outputs.resource_group }}
       workspace_name: ${{ needs.get-config.outputs.aml_workspace }}
-      name: machine-failure-data
+      name: used-cars-data
       data_file: mlops/azureml/train/data.yml
     secrets:
       creds: ${{secrets.AZURE_CREDENTIALS}}
