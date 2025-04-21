@@ -1,4 +1,4 @@
-name: deploy-model-training-pipeline
+name: test-sundara-pipeline
 
 on:
   push:
