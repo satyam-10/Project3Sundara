@@ -24,9 +24,13 @@ jobs:
         max_instances: 1
         cluster_tier: dedicated
         resource_group: ${{ needs.get-config.outputs.resource_group }}
-        workspace_name: ${{ needs.get-config.outputs.aml_workspace }}     
-      secrets:
-          creds: ${{secrets.AZURE_CREDENTIALS}} 
+        workspace_name: ${{ needs.get-config.outputs.aml_workspace }} 
+        client-id: ${{ secrets.AZURE_CLIENT_ID }}
+        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        
+      # secrets:
+      #     creds: ${{secrets.AZURE_CREDENTIALS}} 
         
   register-dataset:
     needs: get-config
@@ -36,8 +40,11 @@ jobs:
       workspace_name: ${{ needs.get-config.outputs.aml_workspace }}
       name: machine-failure-data
       data_file: mlops/azureml/train/data.yml
-    secrets:
-      creds: ${{secrets.AZURE_CREDENTIALS}}
+      client-id: ${{ secrets.AZURE_CLIENT_ID }}
+      tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+      subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+    # secrets:
+    #   creds: ${{secrets.AZURE_CREDENTIALS}}
   
   register-environment:
       needs: get-config
@@ -47,8 +54,11 @@ jobs:
         workspace_name: ${{ needs.get-config.outputs.aml_workspace }}     
         environment_file:  mlops/azureml/train/train-env.yml
         conda_file: data-science/environment/train-conda.yml
-      secrets:
-          creds: ${{secrets.AZURE_CREDENTIALS}}
+        client-id: ${{ secrets.AZURE_CLIENT_ID }}
+        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      # secrets:
+      #     creds: ${{secrets.AZURE_CREDENTIALS}}
       
   run-pipeline:
       needs: [get-config,register-environment,create-compute,register-dataset]
@@ -58,5 +68,8 @@ jobs:
         workspace_name: ${{ needs.get-config.outputs.aml_workspace }}     
         parameters-file:  mlops/azureml/train/newpipeline.yml
         job-name: mlops-pipeline
-      secrets:
-          creds: ${{secrets.AZURE_CREDENTIALS}}
+        client-id: ${{ secrets.AZURE_CLIENT_ID }}
+        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      # secrets:
+      #     creds: ${{secrets.AZURE_CREDENTIALS}}
