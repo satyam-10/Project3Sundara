@@ -16,7 +16,7 @@ jobs:
   
   create-compute:
       needs: get-config
-      uses: Azure/mlops-templates/.github/workflows/create-compute.yml@main
+      uses: ./.github/workflows/custom-create-compute.yml
       with:
         cluster_name: cpu-cluster
         size: Standard_DS11_v2
