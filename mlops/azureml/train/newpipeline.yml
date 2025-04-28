@@ -78,8 +78,8 @@ jobs:
     environment: azureml:used-cars-train-env@latest
     inputs:
       model_name:
-        type: string
-        default: "used_cars_price_prediction_model"
+        type: literal
+        value: "used_cars_price_prediction_model"
       model_path:
         type: mlflow_model
         path: ${{parent.jobs.sweep_step.outputs.model_output}}
